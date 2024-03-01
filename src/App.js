@@ -1,21 +1,21 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Spaces from "./pages/spaces/Spaces";
+import Bookings from "./pages/bookings/Bookings";
+import Login from "./pages/account/Login";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/Spaces" element={<Spaces />} />
+          <Route path="/bookings" element={<Bookings />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
