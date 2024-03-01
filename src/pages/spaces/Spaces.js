@@ -1,11 +1,12 @@
 import React from "react";
+import Header from "../../components/Header";
 
 function Spaces() {
-return (
+  return (
     <>
+      <Header />
     </>
-    );
+  );
 }
 
 export default Spaces;
-    
