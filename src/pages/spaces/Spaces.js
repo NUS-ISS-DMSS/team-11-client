@@ -3,10 +3,11 @@ import Header from "../../components/Header";
 import { Row, Col, Container } from "react-bootstrap";
 import SearchBar from "../../components/SearchBar";
 import SpacesSetting from "./SpacesSetting";
+import Cardcomponent from "../../components/Cards";
 
 function Spaces() {
   const { query, renderSearchBar } = SearchBar();
-  const { filterkeywords } = SpacesSetting();
+  const { filterkeywords, cardsettings } = SpacesSetting();
   const [checkboxQuery, setCheckboxQuery] = useState([]);
 
   const handleChange = (value, event) => {
@@ -18,9 +19,6 @@ function Spaces() {
       );
     }
   };
-
-  console.log(query);
-  console.log(checkboxQuery);
 
   return (
     <>
@@ -48,6 +46,56 @@ function Spaces() {
             </Col>
           ))}
         </Row>
+      </Container>
+
+      <Container>
+        <div className="d-flex flex-wrap justify-content-center align-items-center">
+          {cardsettings
+            .filter((cardsetting) => {
+              if (
+                query &&
+                !cardsetting.station.toLowerCase().includes(query.toLowerCase())
+              ) {
+                return false;
+              }
+
+              if (
+                checkboxQuery.length > 0 &&
+                !cardsetting.keywords.some((keyword) =>
+                  checkboxQuery.includes(keyword.toLowerCase())
+                )
+              ) {
+                return false;
+              }
+              return true;
+            })
+            .map((cardsetting) => (
+              <div
+                key={cardsetting.name}
+                className="d-flex justify-content-center align-items-center p-4"
+              >
+                <Cardcomponent
+                  name={cardsetting.name}
+                  description={cardsetting.description}
+                  address={cardsetting.address}
+                  daysClosed={cardsetting.operatingHours.daysClosed}
+                  operatingHours={
+                    cardsetting.operatingHours.start +
+                    "AM" +
+                    " - " +
+                    cardsetting.operatingHours.end +
+                    "PM"
+                  }
+                  contactNum={cardsetting.contactNum}
+                  station={cardsetting.station}
+                  website={cardsetting.website}
+                  reservationUrl={cardsetting.reservationUrl}
+                  keywords={cardsetting.keywords}
+                  images={cardsetting.images}
+                />
+              </div>
+            ))}
+        </div>
       </Container>
     </>
   );
