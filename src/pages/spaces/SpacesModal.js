@@ -125,7 +125,7 @@ export default function SpacesModal(props) {
                   </span>
 
                   <div className="d-flex justify-content-center align-items-center">
-                    <Button variant="primary">Secure a table</Button>
+                    <Button variant="primary">Book Space</Button>
                   </div>
                 </div>
               </Col>
