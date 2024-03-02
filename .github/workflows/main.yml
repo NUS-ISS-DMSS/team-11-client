@@ -31,3 +31,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Store metadata outputs in an environment file
+        run: echo "TAGS=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
