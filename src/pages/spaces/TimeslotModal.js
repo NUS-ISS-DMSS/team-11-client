@@ -22,7 +22,6 @@ export default function TimeslotModal(props) {
 
   function convertTo24Hour(time12h) {
     const [time, modifier] = time12h.split(" ");
-
     let [hours, minutes] = time.split(":");
     if (hours === "12") {
       hours = "00";
@@ -50,7 +49,7 @@ export default function TimeslotModal(props) {
     const startTime = convertTo24Hour(totalHours[0]);
     const endTime = convertTo24Hour(totalHours[1]);
 
-    const currentDate = new Date();
+    const currentDate = new Date();    
     const startDate = new Date(currentDate.toDateString() + " " + startTime);
     const endDate = new Date(currentDate.toDateString() + " " + endTime);
 
@@ -122,7 +121,7 @@ export default function TimeslotModal(props) {
             </Row>
             <Row>
               <div className="d-flex justify-content-center align-items-center mt-4">
-                <Link to={`/bookings?id=${userId}`}>
+                <Link to={`/bookings`}>
                   <Button variant="primary">Confirm Timeslot</Button>
                 </Link>
               </div>

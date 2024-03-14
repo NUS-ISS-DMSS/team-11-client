@@ -1,31 +1,11 @@
 import React from "react";
 import { Col, Accordion, Container, Row, Badge, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
-// import axios from "axios";
 import Carouselcomponent from "../../components/Carousel";
 
 export default function ListingAccordion(props) {
 
   function handleDelete(e, listingId) {
-    // e.stopPropagation();
-    // props.listingArr.filter(listing => listing.id !== listingId);
-    // console.log(`Deleted listing ${listingId}`);
-
-    // const config = {
-    //   method: "delete",
-    //   url: `https://workgowhere.herokuapp.com/private-user/delete/${id}/${listingId}`,
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // };
-    // axios(config)
-    //   .then(result => {
-    //     console.log("Deleted successfully", result);
-    //     window.location.reload(true);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
   }
 
   return (
