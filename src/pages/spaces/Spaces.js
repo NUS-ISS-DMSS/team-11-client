@@ -81,10 +81,10 @@ function Spaces() {
                   daysClosed={cardsetting.operatingHours.daysClosed}
                   operatingHours={
                     cardsetting.operatingHours.start +
-                    "AM" +
+                    " AM" +
                     " - " +
                     cardsetting.operatingHours.end +
-                    "PM"
+                    " PM"
                   }
                   contactNum={cardsetting.contactNum}
                   station={cardsetting.station}
