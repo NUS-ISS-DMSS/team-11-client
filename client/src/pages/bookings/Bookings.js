@@ -30,7 +30,7 @@ export default function Bookings() {
   }, [isUserFound]);
 
   return (
-    <Container>
+    <>
       <Header />
       <Container className="py-4">
         <Row>
@@ -66,6 +66,6 @@ export default function Bookings() {
           </p>
         )}
       </Container>
-    </Container>
+    </>
   );
 }

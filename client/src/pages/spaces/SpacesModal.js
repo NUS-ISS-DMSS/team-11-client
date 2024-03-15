@@ -6,7 +6,6 @@ import {
   Clock,
   Map,
   Telephone,
-  Globe,
   BatteryCharging,
   Droplet,
   Wifi,
@@ -60,12 +59,6 @@ export default function SpacesModal(props) {
                         <Telephone />
                       </Col>
                       <Col xs={11}>{props.contactNum}</Col>
-                    </span>
-                    <span className="d-flex flex-row pb-2">
-                      <Col xs={1}>
-                        <Globe />
-                      </Col>
-                      <Col xs={11}>{props.website}</Col>
                     </span>
                     <span className="d-flex flex-wrap pb-4">
                       {props.keywords.map((keyword) => {

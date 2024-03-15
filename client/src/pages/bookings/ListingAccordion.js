@@ -61,13 +61,13 @@ export default function ListingAccordion(props) {
                             Operating Hours
                           </small>
                           <p className="text-black">
-                            {`${list.operatingHours.start} AM - ${list.operatingHours.end} PM`}
+                            {`${list.operatingHours_start} AM - ${list.operatingHours_end} PM`}
                           </p>
                           <small className="text-secondary">
                             Day(s) closed
                           </small>
                           <p className="text-black">
-                            {list.operatingHours.daysClosed.join(", ")}
+                            {list.daysClosed}
                           </p>
                           <small className="text-secondary">
                             Contact Number
@@ -75,25 +75,9 @@ export default function ListingAccordion(props) {
                           <p className="text-black">{list.contactNum}</p>
                         </Col>
                         <Col xs={12} sm={8} md={6} xl={3}>
-                          <small className="text-secondary">Website</small>
-                          <a
-                            href={list.website}
-                            className="text-black d-block mb-2"
-                          >
-                            {list.website}
-                          </a>
-                          <small className="text-secondary">
-                            Reservation Website
-                          </small>
-                          <a
-                            href={list.reservationUrl}
-                            className="text-black d-block mb-2"
-                          >
-                            {list.reservationUrl}
-                          </a>
                           <small className="text-secondary">Keywords</small>
                           <div className="flex">
-                            {list.keywords.map((word, index) => {
+                            {list.keywords.split(", ").map((word, index) => {
                               return (
                                 <p className="text-black m-0" key={index}>
                                   {`- ${word}`}
