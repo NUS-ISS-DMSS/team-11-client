@@ -1,9 +1,9 @@
-import space1p1 from "../assets/spaceAssets/billyspace1.jpeg";
-import space1p2 from "../assets/spaceAssets/billyspace2.jpeg";
-import space1p3 from "../assets/spaceAssets/billyspace3.jpeg";
 import space2p1 from "../assets/spaceAssets/cafe1.jpeg";
 import space2p2 from "../assets/spaceAssets/cafe2.jpeg";
 import space2p3 from "../assets/spaceAssets/cafe3.jpeg";
+import space4p1 from "../assets/spaceAssets/p1img1.png";
+import space4p2 from "../assets/spaceAssets/p1img2.png";
+import space4p3 from "../assets/spaceAssets/p1img3.png";
 
 export const mockAccount = {
   users: [
@@ -25,7 +25,7 @@ export const mockAccount = {
           contactNum: "61234567",
           station: "Queenstown",
           keywords: "Wifi, Parking, Socket",
-          images: [space1p1, space1p2, space1p3],
+          images: [space4p1, space4p2, space4p3],
           createdAt: "04/08/2022",
         },
       ],
@@ -48,7 +48,7 @@ export const mockAccount = {
           contactNum: "61234567",
           station: "Queenstown",
           keywords: "Wifi, Parking, Socket",
-          images: [space1p1, space1p2, space1p3],
+          images: [space4p1, space4p2, space4p3],
           createdAt: "04/08/2022",
         },
         {
