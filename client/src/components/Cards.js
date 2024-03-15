@@ -16,19 +16,15 @@ import {
 export default function Cardcomponent(props) {
 
   let [modalshow, setModalshow] = useState(false);
-  let daysClosed = props.daysClosed;
+  let daysClosed = props.daysClosed.split(", ");
   let operationDays = "";
-  let daysArray = [];
 
   // days operating checker
   function operation_check() {
     if (daysClosed[0] === "None") {
       operationDays = "Opens Daily ";
     } else {
-      daysClosed.forEach((dayClose) => {
-        daysArray.push(dayClose);
-        operationDays = "Closed on " + daysArray.join(", ");
-      });
+      operationDays = "Closed on " + props.daysClosed;
     }
   }
 
@@ -139,8 +135,6 @@ export default function Cardcomponent(props) {
         operatingHours={props.operatingHours}
         contactNum={props.contactNum}
         station={props.station}
-        website={props.website}
-        reservationUrl={props.reservationUrl}
         keywords={props.keywords}
         images={props.images}
       />

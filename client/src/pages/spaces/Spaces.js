@@ -61,7 +61,7 @@ function Spaces() {
 
               if (
                 checkboxQuery.length > 0 &&
-                !cardsetting.keywords.some((keyword) =>
+                !cardsetting.keywords.split(", ").some((keyword) =>
                   checkboxQuery.includes(keyword.toLowerCase())
                 )
               ) {
@@ -78,19 +78,17 @@ function Spaces() {
                   name={cardsetting.name}
                   description={cardsetting.description}
                   address={cardsetting.address}
-                  daysClosed={cardsetting.operatingHours.daysClosed}
+                  daysClosed={cardsetting.daysClosed}
                   operatingHours={
-                    cardsetting.operatingHours.start +
+                    cardsetting.operatingHours_start +
                     " AM" +
                     " - " +
-                    cardsetting.operatingHours.end +
+                    cardsetting.operatingHours_end +
                     " PM"
                   }
                   contactNum={cardsetting.contactNum}
                   station={cardsetting.station}
-                  website={cardsetting.website}
-                  reservationUrl={cardsetting.reservationUrl}
-                  keywords={cardsetting.keywords}
+                  keywords={cardsetting.keywords.split(", ")}
                   images={cardsetting.images}
                 />
               </div>
