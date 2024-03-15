@@ -1,0 +1,21 @@
+// Override default variables before the import
+$primary: #0052cc;
+$purple: #6554c0;
+$red: #ff5630;
+$orange: #ffab00;
+$green: #36b37e;
+$teal: #00bbd9;
+
+$black: #172b4d;
+$gray-100: #f2f4f7;
+$gray-200: #e4e7ec;
+$gray-300: #d0d5dd;
+$gray-400: #98a2b3;
+$gray-500: #667085;
+$gray-600: #475467;
+$gray-700: #344054;
+$gray-800: #1d2939;
+$gray-900: #101828;
+
+// Import Bootstrap and its default variables
+@import "../node_modules/bootstrap/scss/bootstrap";
