@@ -1,12 +1,28 @@
 FROM node:latest
 
-WORKDIR /usr/client/src/app
+# Set the working directory for the client
+WORKDIR /usr/client
 
-COPY package.json package-lock.json ./
-
+# Copy and install client dependencies
+COPY client/package.json client/package-lock.json ./
 RUN npm install
 
-COPY . .
+# Build client application
+COPY client/ ./
+RUN npm run build
 
+# Set the working directory for the server
+WORKDIR /usr/server
+
+# Copy and install server dependencies
+COPY server/package.json server/package-lock.json ./
+RUN npm install
+
+# Copy server source code
+COPY server/ ./
+
+# Expose the port for the server (change if necessary)
 EXPOSE 4000
-CMD [ "node", "index.js" ]
+
+# Start the server
+CMD ["npm", "start"]
