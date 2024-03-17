@@ -13,26 +13,22 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     operatingHours_start: {
-      type: DataTypes.STRING,
+      type: DataTypes.TIME,
       allowNull: false,
     },
     operatingHours_end: {
+      type: DataTypes.TIME,
+      allowNull: false,
+    },
+    days_closed: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    daysClosed: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    contactNum: {
+    contact_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     station: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    keywords: {
       type: DataTypes.STRING,
       allowNull: false,
     },

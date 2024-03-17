@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define("Users", {
-    fullName: {
+    full_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },

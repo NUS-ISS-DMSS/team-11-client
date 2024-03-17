@@ -88,7 +88,7 @@ function Spaces() {
                   }
                   contactNum={cardsetting.contactNum}
                   station={cardsetting.station}
-                  keywords={cardsetting.keywords.split(", ")}
+                  keywords={cardsetting.keywords}
                   images={cardsetting.images}
                 />
               </div>

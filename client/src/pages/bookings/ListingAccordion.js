@@ -77,7 +77,7 @@ export default function ListingAccordion(props) {
                         <Col xs={12} sm={8} md={6} xl={3}>
                           <small className="text-secondary">Keywords</small>
                           <div className="flex">
-                            {list.keywords.split(", ").map((word, index) => {
+                            {list.keywords.map((word, index) => {
                               return (
                                 <p className="text-black m-0" key={index}>
                                   {`- ${word}`}
