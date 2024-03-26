@@ -26,7 +26,7 @@ public class SpaceAmenityController {
     @Autowired
     private AmenitiesRepository amenitiesRepository;
 
-    @PostMapping("/add")
+    @PostMapping("/createSpaceAmenities")
     public ResponseEntity<String> add(@RequestBody SpaceAmenities spaceAmenities) {
         int amenityID = spaceAmenities.getAmenity().getId();
         int spaceID = spaceAmenities.getSpace().getId();

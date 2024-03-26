@@ -1,11 +1,8 @@
 package com.nusteam11.team11.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +17,7 @@ public class SpacesController {
     @Autowired
     private SpacesService spaceService;
 
-    @GetMapping("/getAll")
-    public List<Spaces> getAllSpaces(Spaces space) {
-        return spaceService.getAllSpaces(space);
-    }
-
-    @PostMapping("/add")
+    @PostMapping("/createSpaces")
     public ResponseEntity<String> add(@RequestBody Spaces space) {
         if (!space.getName().isEmpty()
                 && !space.getDescription().isEmpty() && !space.getAddress().isEmpty()

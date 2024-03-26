@@ -25,7 +25,7 @@ public class AmenityController {
         return amenitiesService.getAllAmenities(amenities);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/createAmenity")
     public ResponseEntity<String> add(@RequestBody Amenities amenities) {
         if (!amenities.getLabel().isEmpty() && !amenities.getValue().isEmpty()) {
             amenitiesService.saveAmenities(amenities);

@@ -22,7 +22,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<Users> getAllUsers(Users user) {
-        return usersRepository.findAll();
+    public List<Users> getUserByEmailAndPassword(Users user, String email, String password) {
+        return usersRepository.findByEmailAndPassword(email, password);
     }
 }

@@ -30,7 +30,7 @@ public class ReservationsController {
     @Autowired
     private TimeSlotsRepository timeSlotsRepository;
 
-    @PostMapping("/add")
+    @PostMapping("/createReservation")
     public ResponseEntity<String> add(@RequestBody Reservations reservations) {
         int spaceAmenityID = reservations.getSpaceAmenity().getId();
         int userID = reservations.getUser().getId();

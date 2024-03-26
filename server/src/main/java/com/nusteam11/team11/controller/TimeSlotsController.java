@@ -22,7 +22,7 @@ public class TimeSlotsController {
     @Autowired
     private SpacesRepository spacesRepository;
 
-    @PostMapping("/add")
+    @PostMapping("/createTimeSlots")
     public ResponseEntity<String> add(@RequestBody TimeSlots timeSlot) {
         int timeSlotID = timeSlot.getSpace().getId();
 
