@@ -47,6 +47,4 @@ public class SpaceAmenities {
     public void setAmenity(Amenities amenity) {
         this.amenity = amenity;
     }
-
-    
 }
