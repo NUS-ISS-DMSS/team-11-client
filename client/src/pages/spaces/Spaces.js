@@ -58,10 +58,9 @@ function Spaces() {
               ) {
                 return false;
               }
-
               if (
                 checkboxQuery.length > 0 &&
-                !cardsetting.keywords.split(", ").some((keyword) =>
+                !cardsetting.keywords.some((keyword) =>
                   checkboxQuery.includes(keyword.toLowerCase())
                 )
               ) {

@@ -1,5 +1,7 @@
 package com.nusteam11.team11.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,10 @@ public class TimeSlotsServiceImpl implements TimeSlotsService {
     @Override
     public TimeSlots saveTimeSlots(TimeSlots timeSlot) {
         return timeSlotsRepository.save(timeSlot);
+    }
+
+    @Override
+    public List<TimeSlots> getAllTimeSlots(TimeSlots timeSlot) {
+        return timeSlotsRepository.findAll();
     }
 }

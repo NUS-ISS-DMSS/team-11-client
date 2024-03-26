@@ -23,6 +23,6 @@ public class SpaceAmenitiesServiceImpl implements SpaceAmenitiesService {
 
     @Override
     public List<SpaceAmenities> getAllSpaces(SpaceAmenities spaceAmenities) {
-    return spaceAmenitiesRepository.findAll();
+        return spaceAmenitiesRepository.findAll();
     }
 }

@@ -1,5 +1,7 @@
 package com.nusteam11.team11.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,10 @@ public class ReservationsServiceImpl implements ReservationsService{
     @Override
     public Reservations saveReservations(Reservations reservations) {
         return reservationsRepository.save(reservations);
+    }
+
+    @Override
+    public List<Reservations> getAllReservations(Reservations reservations) {
+        return reservationsRepository.findAll();
     }
 }

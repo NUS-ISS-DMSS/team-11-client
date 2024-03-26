@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class TimeSlots {
@@ -14,10 +12,6 @@ public class TimeSlots {
     private int id;
     private String start_time;
     private String end_time;
-
-    @ManyToOne
-    @JoinColumn(name = "space_id", referencedColumnName = "id")
-    private Spaces space;
 
     public TimeSlots() {
     }
@@ -45,13 +39,4 @@ public class TimeSlots {
     public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
-
-    public Spaces getSpace() {
-        return space;
-    }
-
-    public void setSpace(Spaces space) {
-        this.space = space;
-    }
-
 }
