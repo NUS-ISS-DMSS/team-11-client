@@ -14,7 +14,7 @@ public class SpaceAmenities {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "space_id", referencedColumnName = "id")
+    @JoinColumn(name = "space_id", referencedColumnName = "id", unique = false)
     private Spaces space;
 
     @ManyToOne

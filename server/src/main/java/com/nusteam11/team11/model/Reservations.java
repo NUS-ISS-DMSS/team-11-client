@@ -16,8 +16,8 @@ public class Reservations {
     private String reservation_date;
 
     @ManyToOne
-    @JoinColumn(name = "space_amenity_id", referencedColumnName = "id")
-    private SpaceAmenities spaceAmenity;
+    @JoinColumn(name = "space_id", referencedColumnName = "id")
+    private Spaces space;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -46,12 +46,12 @@ public class Reservations {
         this.reservation_date = reservation_date;
     }
 
-    public SpaceAmenities getSpaceAmenity() {
-        return spaceAmenity;
+    public Spaces getSpace() {
+        return space;
     }
 
-    public void setSpaceAmenity(SpaceAmenities spaceAmenity) {
-        this.spaceAmenity = spaceAmenity;
+    public void setSpace(Spaces space) {
+        this.space = space;
     }
 
     public Users getUser() {
@@ -70,4 +70,5 @@ public class Reservations {
         this.timeSlot = timeSlot;
     }
 
+    
 }

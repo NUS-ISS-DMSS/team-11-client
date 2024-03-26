@@ -35,19 +35,19 @@ public class ReservationsController {
 
     @PostMapping("/createReservation")
     public ResponseEntity<String> add(@RequestBody Reservations reservations) {
-        int spaceAmenityID = reservations.getSpaceAmenity().getId();
+        int spaceID = reservations.getSpace().getId();
         int userID = reservations.getUser().getId();
         int timeSlotID = reservations.getTimeSlot().getId();
 
         if (!reservations.getReservation_date().isEmpty()
-                && spaceAmenitiesRepository.existsById(spaceAmenityID)
+                && spaceAmenitiesRepository.existsById(spaceID)
                 && usersRepository.existsById(userID)
                 && timeSlotsRepository.existsById(timeSlotID)) {
             reservationsService.saveReservations(reservations);
             return ResponseEntity.status(HttpStatus.CREATED).body("New reservation is added");
         } else if (reservations.getReservation_date().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reservation Date is empty.");
-        } else if (!spaceAmenitiesRepository.existsById(spaceAmenityID)) {
+        } else if (!spaceAmenitiesRepository.existsById(spaceID)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Space Amenities ID does not exist.");
         } else if (!usersRepository.existsById(userID)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User ID does not exist.");
