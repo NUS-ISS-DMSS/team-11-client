@@ -1,6 +1,9 @@
 package com.nusteam11.team11.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nusteam11.team11.model.SpaceAmenities;
+import com.nusteam11.team11.model.Spaces;
 import com.nusteam11.team11.repository.AmenitiesRepository;
+import com.nusteam11.team11.repository.SpaceAmenitiesRepository;
 import com.nusteam11.team11.repository.SpacesRepository;
 import com.nusteam11.team11.service.SpaceAmenitiesService;
 
@@ -28,6 +33,9 @@ public class SpaceAmenityController {
 
     @Autowired
     private AmenitiesRepository amenitiesRepository;
+
+    @Autowired
+    private SpaceAmenitiesRepository spaceAmenitiesRepository;
 
     @PostMapping("/createSpaceAmenities")
     public ResponseEntity<String> add(@RequestBody SpaceAmenities spaceAmenities) {
@@ -49,7 +57,38 @@ public class SpaceAmenityController {
     }
 
     @GetMapping("/getAllSpaces")
-    public List<SpaceAmenities> getAllSpaces(SpaceAmenities spaceAmenities) {
-        return spaceAmenitiesService.getAllSpaces(spaceAmenities);
+    public List<Map<String, Object>>findAllSpaces(SpaceAmenities spaceAmenities) {
+        List<Object[]> resultList = spaceAmenitiesRepository.findAllSpaces(spaceAmenities);
+        Map<Integer, Map<String, Object>> spaceMap = new HashMap<>();
+
+        for (Object[] row : resultList) {
+            Spaces space = (Spaces) row[0];
+            String amenityLabel = (String) row[1];
+
+            if (!spaceMap.containsKey(space.getId())) {
+                Map<String, Object> spaceData = mapSpace(space);
+                spaceData.put("amenities", new ArrayList<String>());
+                spaceMap.put(space.getId(), spaceData);
+            }
+
+            @SuppressWarnings("unchecked")
+            List<String> amenities = (List<String>) spaceMap.get(space.getId()).get("amenities");
+            amenities.add(amenityLabel);
+        }
+
+        return new ArrayList<>(spaceMap.values());
+    }
+
+    private Map<String, Object> mapSpace(Spaces space) {
+        Map<String, Object> spaceData = new HashMap<>();
+        spaceData.put("name", space.getName());
+        spaceData.put("description", space.getDescription());
+        spaceData.put("address", space.getAddress());
+        spaceData.put("operate_hour_st", space.getOperate_hour_st());
+        spaceData.put("operate_hour_et", space.getOperate_hour_et());
+        spaceData.put("days_closed", space.getDays_closed());
+        spaceData.put("contact_num", space.getContact_num());
+        spaceData.put("station", space.getStation());
+        return spaceData;
     }
 }

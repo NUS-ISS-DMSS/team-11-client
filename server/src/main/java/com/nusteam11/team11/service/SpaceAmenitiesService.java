@@ -6,5 +6,5 @@ import com.nusteam11.team11.model.SpaceAmenities;
 
 public interface SpaceAmenitiesService {
     public SpaceAmenities savSpaceAmenities(SpaceAmenities spaceAmenities);
-    public List<SpaceAmenities> getAllSpaces(SpaceAmenities spaceAmenities);
+    public List<Object[]> findAllSpaces(SpaceAmenities spaceAmenities);
 }
