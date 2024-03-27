@@ -1,21 +1,24 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Form, Modal, Button, Alert } from "react-bootstrap";
-import { mockAccount } from "../../mocks/mockAccount";
-
+import { getAllUsers, createUser } from "../../api/userApi";
 
 export default function SignUpModal(props) {
   const [register, setRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // for mock data
-  const [accountArr, setAccountArr] = useState(mockAccount.users);
+  const [accountArr, setAccountArr] = useState([]);
 
   const fullNameEl = useRef();
   const emailEl = useRef();
   const passwordEl = useRef();
 
-  // for mock data
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setAccountArr(await getAllUsers());
+    };
+    fetchUsers();
+  }, []);
+
   const isUserExist = useCallback(
     (email) => {
       return accountArr.some((user) => user.email === email);
@@ -28,12 +31,15 @@ export default function SignUpModal(props) {
       e.preventDefault();
       setIsLoading(true);
 
-      const fullName = fullNameEl.current.value;
-      const email = emailEl.current.value;
-      const password = passwordEl.current.value;
+      //validate if email is used
+      const isUserFound = isUserExist(emailEl.current.value);
 
-      // for mock data
-      const isUserFound = isUserExist(email);
+      //for posting to api
+      const userData = {
+        full_name: fullNameEl.current.value,
+        email: emailEl.current.value,
+        password: passwordEl.current.value,
+      };
 
       if (isUserFound) {
         setError(
@@ -41,14 +47,14 @@ export default function SignUpModal(props) {
         );
         setIsLoading(false);
       } else {
-        const newUser = { fullName, email, password };
-        setAccountArr((prevArr) => [...prevArr, newUser]);
-        setRegister(true);
+        const newUser = async () => {
+          // const newUser = await createUser(userData);
+          setRegister(true);
+        };
+        newUser();
       }
     },
     [isUserExist, setAccountArr, setIsLoading, setError]
-
-   
   );
 
   return (

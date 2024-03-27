@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +19,15 @@ import com.nusteam11.team11.service.UsersService;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UsersController {
     @Autowired
     private UsersService userService;
+
+    @GetMapping("/getAllUsers")
+    public List<Users> getAllUsers(Users user){
+        return userService.getAllUsers(user);
+    }
 
     @GetMapping("/getUser")
     public List<Users> getUserByEmailAndPassword(Users user, @RequestParam String email,
