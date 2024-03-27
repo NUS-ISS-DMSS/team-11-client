@@ -16,7 +16,15 @@ export const getAllUsers = async () => {
   }
 };
 
-
+export const getUser = async (email, password) => {
+    try {
+      const response = await api.get(`/user/getUser?email=${email}&password=${password}`);
+      return response.data;
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+      throw error;
+    }
+  };
 
 export const createUser = async (userData) => {
   try {

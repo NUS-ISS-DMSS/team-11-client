@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { mockAccount } from "../../mocks/mockAccount";
-
+import { getUser } from "../../api/userApi";
 
 export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,27 +10,23 @@ export default function SignInForm() {
   const passwordEl = useRef();
 
   const handleSubmit = useCallback(
-    () => (e) => {
+    () => async (e) => {
       e.preventDefault();
       setIsLoading(true);
-      const email = emailEl.current?.value;
-      const password = passwordEl.current?.value;
 
-      // for mock data
-      const isUserFound = mockAccount.users.find(
-        (user) => user.email === email && user.password === password
+      const userData = await getUser(
+        emailEl.current?.value,
+        passwordEl.current?.value
       );
 
-      if (!isUserFound) {
+      if (userData.length == 0) {
         setError("Invalid Email/Password. Please Try Again.");
         setIsLoading(false);
       } else {
-        window.location.href = `/spaces?id=` + isUserFound.id;
+        window.location.href = `/spaces?id=` + userData[0].id;
       }
     },
     [setIsLoading, setError, emailEl, passwordEl]
-
-  
   );
 
   return (
