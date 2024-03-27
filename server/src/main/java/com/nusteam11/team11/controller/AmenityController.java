@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,12 @@ import com.nusteam11.team11.service.AmenitiesService;
 
 @RestController
 @RequestMapping("/amenity")
+@CrossOrigin
 public class AmenityController {
     @Autowired
     private AmenitiesService amenitiesService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllAmenity")
     public List<Amenities> getAllAmenities(Amenities amenities) {
         return amenitiesService.getAllAmenities(amenities);
     }

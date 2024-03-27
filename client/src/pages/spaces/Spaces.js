@@ -29,9 +29,9 @@ function Spaces() {
 
       <Container className="d-flex justify-content-center align-items-center">
         <Row>
-          {filterkeywords.map(({ _id, label, value }) => (
+          {filterkeywords.map(({ label, value }) => (
             <Col
-              key={_id}
+              key={value}
               xs={4}
               className="d-flex justify-content-center align-items-center p-2"
             >
@@ -60,8 +60,8 @@ function Spaces() {
               }
               if (
                 checkboxQuery.length > 0 &&
-                !cardsetting.keywords.some((keyword) =>
-                  checkboxQuery.includes(keyword.toLowerCase())
+                !cardsetting.amenities.some((amenity) =>
+                  checkboxQuery.includes(amenity.toLowerCase())
                 )
               ) {
                 return false;
@@ -77,18 +77,18 @@ function Spaces() {
                   name={cardsetting.name}
                   description={cardsetting.description}
                   address={cardsetting.address}
-                  daysClosed={cardsetting.daysClosed}
+                  daysClosed={cardsetting.days_closed}
                   operatingHours={
-                    cardsetting.operatingHours_start +
+                    cardsetting.operate_hour_st +
                     " AM" +
                     " - " +
-                    cardsetting.operatingHours_end +
+                    cardsetting.operate_hour_et +
                     " PM"
                   }
-                  contactNum={cardsetting.contactNum}
+                  contactNum={cardsetting.contact_num}
                   station={cardsetting.station}
-                  keywords={cardsetting.keywords}
-                  images={cardsetting.images}
+                  amenities={cardsetting.amenities}
+                  // images={cardsetting.images}
                 />
               </div>
             ))}

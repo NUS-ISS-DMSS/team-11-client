@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ import com.nusteam11.team11.service.SpaceAmenitiesService;
 
 @RestController
 @RequestMapping("/spaceAmenities")
+@CrossOrigin
 public class SpaceAmenityController {
 
     @Autowired
@@ -81,6 +83,7 @@ public class SpaceAmenityController {
 
     private Map<String, Object> mapSpace(Spaces space) {
         Map<String, Object> spaceData = new HashMap<>();
+        spaceData.put("id", space.getId());
         spaceData.put("name", space.getName());
         spaceData.put("description", space.getDescription());
         spaceData.put("address", space.getAddress());

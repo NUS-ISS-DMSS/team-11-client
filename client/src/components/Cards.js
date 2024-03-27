@@ -35,7 +35,7 @@ export default function Cardcomponent(props) {
     <div>
       <Card style={{ maxWidth: "20em" }}>
         <Card.Header className="p-0">
-          <Carouselcomponent images={props.images} alt="slides images" />
+          {/* <Carouselcomponent images={props.images} alt="slides images" /> */}
         </Card.Header>
 
         <div onClick={() => setModalshow(true)}>
@@ -61,57 +61,57 @@ export default function Cardcomponent(props) {
               </div>
 
               <div className="d-flex flex-wrap">
-                {props.keywords.map((keyword) => {
-                    if (keyword === "Wifi") {
+                {props.amenities.map((amenity) => {
+                    if (amenity === "Wifi") {
                       return (
-                        <div key={keyword} className="p-1">
+                        <div key={amenity} className="p-1">
                           <Badge bg="success">
-                            <div>{keyword}</div>
+                            <div>{amenity}</div>
                             <Wifi />
                           </Badge>
                         </div>
                       );
-                    } else if (keyword === "Socket") {
+                    } else if (amenity === "Socket") {
                       return (
-                        <div key={keyword} className="p-1">
+                        <div key={amenity} className="p-1">
                           <Badge bg="success">
-                            <div>{keyword}</div>
+                            <div>{amenity}</div>
                             <BatteryCharging />
                           </Badge>
                         </div>
                       );
-                    } else if (keyword === "Toilet") {
+                    } else if (amenity === "Toilet") {
                       return (
-                        <div key={keyword} className="p-1">
+                        <div key={amenity} className="p-1">
                           <Badge bg="info">
-                            <div>{keyword}</div>
+                            <div>{amenity}</div>
                             <Droplet />
                           </Badge>
                         </div>
                       );
-                    } else if (keyword === "Parking") {
+                    } else if (amenity === "Parking") {
                       return (
-                        <div key={keyword} className="p-1">
+                        <div key={amenity} className="p-1">
                           <Badge bg="info">
-                            <div>{keyword}</div>
+                            <div>{amenity}</div>
                             <Stoplights />
                           </Badge>
                         </div>
                       );
-                    } else if (keyword === "Quiet") {
+                    } else if (amenity === "Quiet") {
                       return (
-                        <div key={keyword} className="p-1">
+                        <div key={amenity} className="p-1">
                           <Badge bg="secondary">
-                            <div>{keyword}</div>
+                            <div>{amenity}</div>
                             <BellSlash />
                           </Badge>
                         </div>
                       );
-                    } else if (keyword === "Noisy") {
+                    } else if (amenity === "Noisy") {
                       return (
-                        <div key={keyword} className="p-1">
+                        <div key={amenity} className="p-1">
                           <Badge bg="secondary">
-                            <div>{keyword}</div>
+                            <div>{amenity}</div>
                             <Speaker />
                           </Badge>
                         </div>
@@ -135,8 +135,8 @@ export default function Cardcomponent(props) {
         operatingHours={props.operatingHours}
         contactNum={props.contactNum}
         station={props.station}
-        keywords={props.keywords}
-        images={props.images}
+        amenities={props.amenities}
+        // images={props.images}
       />
     </div>
   );
