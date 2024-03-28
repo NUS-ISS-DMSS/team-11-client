@@ -45,14 +45,6 @@ export default function ListingAccordion(props) {
                         <Col>
                           <div>{formattedDate}</div>
                         </Col>
-                        <Col className="d-none d-md-block d-lg-block d-xl-block">
-                          <div>
-                            {list.timeSlot.start_time +
-                              " AM - " +
-                              list.timeSlot.end_time +
-                              " PM"}
-                          </div>
-                        </Col>
                       </Row>
                     </Container>
                   </Accordion.Header>

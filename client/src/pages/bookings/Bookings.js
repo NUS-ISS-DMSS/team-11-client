@@ -48,16 +48,15 @@ export default function Bookings() {
         </Row>
       </Container>
 
-      <Container className="d-none d-md-block d-lg-block d-xl-block">
+      <Container className="d-md-block d-lg-block d-xl-block">
         {listingArr.length > 0 ? (
           <>
-            <Container className="d-none d-md-block d-lg-block d-xl-block">
+            <Container className="d-md-block d-lg-block d-xl-block">
               <Container>
                 <Row className="border rounded p-2 bg-black text-white">
                   <Col>ID</Col>
                   <Col>Name of Space</Col>
                   <Col>Reservation Date</Col>
-                  <Col>Reservation Time Slot</Col>
                 </Row>
               </Container>
             </Container>
