@@ -8,18 +8,11 @@ export default function Header() {
   var pathname = window.location.pathname;
 
   function getUrlParams() {
-    var params = {};
-    var queryString = window.location.search.substring(1);
-    var pairs = queryString.split("&");
-    for (var i = 0; i < pairs.length; i++) {
-      var pair = pairs[i].split("=");
-      params[pair[0]] = decodeURIComponent(pair[1]);
-    }
-    return params;
+    return Object.fromEntries(new URLSearchParams(window.location.search));
   }
-
-  var urlParams = getUrlParams();
-  var userId = urlParams["userID"];
+  
+  const urlParams = getUrlParams();
+  const userId = urlParams["userID"];
 
   return (
     <>

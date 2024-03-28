@@ -1,55 +1,46 @@
 import React, { useState } from "react";
 import { Modal, Row, Col, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { createTimeSlots } from "../../api/timeSlotsApi";
+import { createReservation } from "../../api/reservationsApi";
 
 export default function TimeslotModal(props) {
   const [checkboxQuery, setCheckboxQuery] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [toggleCfm, setToggleCfm] = useState(false);
+
   const timeSlots = [];
 
   function getUrlParams() {
-    var params = {};
-    var queryString = window.location.search.substring(1);
-    var pairs = queryString.split("&");
-    for (var i = 0; i < pairs.length; i++) {
-      var pair = pairs[i].split("=");
-      params[pair[0]] = decodeURIComponent(pair[1]);
-    }
-    return params;
+    return Object.fromEntries(new URLSearchParams(window.location.search));
   }
 
-  var urlParams = getUrlParams();
-  var userId = urlParams["userID"];
+  const urlParams = getUrlParams();
+  const userId = urlParams["userID"];
 
   function convertTo24Hour(time12h) {
     const [time, modifier] = time12h.split(" ");
     let [hours, minutes] = time.split(":");
-    if (hours === "12") {
-      hours = "00";
-    }
-    if (modifier === "PM") {
-      hours = parseInt(hours, 10) + 12;
-      if (hours === 24) {
-        hours = 12;
-      }
-    }
+    hours = hours === "12" && modifier === "AM" ? "00" : hours;
+    hours = modifier === "PM" ? parseInt(hours, 10) + 12 : hours;
+    hours = hours === 24 ? 12 : hours;
     return `${String(hours).padStart(2, "0")}:${minutes}`;
   }
 
   function convertTo12Hour(time) {
-    let hours = time.getHours();
-    const minutes = time.getMinutes();
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours %= 12;
-    hours = hours || 12;
-    return `${hours}:${minutes < 10 ? "0" : ""}${minutes} ${ampm}`;
+    let hours = time.getHours() % 12 || 12;
+    const minutes = String(time.getMinutes()).padStart(2, "0");
+    const ampm = time.getHours() >= 12 ? "PM" : "AM";
+    return `${hours}:${minutes} ${ampm}`;
   }
 
   function generateTimeSlots() {
-    const totalHours = props.operatingHours.split(" - ");
-    const startTime = convertTo24Hour(totalHours[0]);
-    const endTime = convertTo24Hour(totalHours[1]);
+    const [startTime, endTime] = props.operatingHours
+      .split(" - ")
+      .map(convertTo24Hour);
 
-    const currentDate = new Date();    
+    const currentDate = new Date();
     const startDate = new Date(currentDate.toDateString() + " " + startTime);
     const endDate = new Date(currentDate.toDateString() + " " + endTime);
 
@@ -57,31 +48,47 @@ export default function TimeslotModal(props) {
 
     while (currentTime < endDate) {
       const nextHour = new Date(currentTime);
-      if (nextHour < endDate) {
-        nextHour.setMinutes(nextHour.getMinutes() + 30);
-      } else {
-        nextHour.setHours(nextHour.getHours() + 1);
-      }
+      nextHour.setHours(nextHour.getHours() + 1);
 
-      const startTime12Hour = convertTo12Hour(currentTime);
-      const endTime12Hour = convertTo12Hour(nextHour);
+      if (nextHour >= endDate) break;
 
-      timeSlots.push(`${startTime12Hour}-${endTime12Hour}`);
-
+      timeSlots.push(
+        `${convertTo12Hour(currentTime)}-${convertTo12Hour(nextHour)}`
+      );
       currentTime = nextHour;
     }
     return timeSlots;
   }
 
-  const handleChange = (value, event) => {
-    if (event.target.checked) {
-      setCheckboxQuery((prevValues) => [...prevValues, value]);
-    } else {
-      setCheckboxQuery((prevValues) =>
-        prevValues.filter((item) => item !== value)
-      );
-    }
+  const handleChange = (event) => {
+    const [startFullTime, endFullTime] = event.target.value.split("-");
+    const startTime = startFullTime.replace(/\s?[AP]M/g, "");
+    const endTime = endFullTime.replace(/\s?[AP]M/g, "");
+    setSelectedOption(event.target.value);
+    setCheckboxQuery({ start_time: startTime, end_time: endTime });
     console.log(checkboxQuery);
+  };
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleProceed = async (event) => {
+    await createTimeSlots(checkboxQuery);
+    setToggleCfm(true);
+  };
+
+  const handleSubmit = async (event) => {
+    const timeSlotId = await createTimeSlots(checkboxQuery);
+    const reservationData = {
+      reservation_date: selectedDate,
+      space: { id: props.spaceId },
+      user: { id: parseInt(userId) },
+      timeSlot: { id: timeSlotId },
+      status: "Booked"
+    };
+    await createReservation(reservationData);
+    setToggleCfm(false);
   };
 
   generateTimeSlots();
@@ -94,13 +101,27 @@ export default function TimeslotModal(props) {
         onHide={props.handleClose}
         centered
       >
-        <Modal.Header closeButton className="border-0">
-          <h3 className="w-100 d-flex justify-content-center">
-            Select A Timeslot
-          </h3>
-        </Modal.Header>
+        <Modal.Header closeButton className="pb-0 border-0"></Modal.Header>
         <Modal.Body>
           <Container>
+            <Row>
+              <h2 className="pt-0 w-100 d-flex justify-content-center">
+                Select A Date
+              </h2>
+            </Row>
+            <Row className="d-flex justify-content-center">
+              <input
+                type="date"
+                className="form-control w-50"
+                value={selectedDate}
+                onChange={handleDateChange}
+              />
+            </Row>
+            <Row>
+              <h2 className="pt-4 w-100 d-flex justify-content-center">
+                Select A Time Slot
+              </h2>
+            </Row>
             <Row>
               {timeSlots.map((timeSlot, index) => (
                 <Col
@@ -110,23 +131,32 @@ export default function TimeslotModal(props) {
                 >
                   <div>
                     <input
-                      type="checkbox"
+                      type="radio"
                       name={index}
-                      onChange={(e) => handleChange(timeSlot, e)}
+                      value={timeSlot}
+                      checked={selectedOption === timeSlot}
+                      onChange={handleChange}
                     />{" "}
                     {timeSlot}
                   </div>
                 </Col>
               ))}
             </Row>
-            <Row>
-              <div className="d-flex justify-content-center align-items-center mt-4">
-                <Link to={`/bookings?userID=` + userId}>
-                  <Button variant="primary">Confirm Timeslot</Button>
-                </Link>
-              </div>
-            </Row>
           </Container>
+          <div className="d-flex justify-content-center align-items-center mt-4">
+            <Button variant="primary" onClick={handleProceed}>
+              Proceed
+            </Button>
+          </div>
+          <div className="d-flex justify-content-center align-items-center mt-4">
+            {toggleCfm && (
+              <Link to={`/bookings?userID=` + userId}>
+                <Button variant="primary" onClick={handleSubmit}>
+                  Confirm Booking
+                </Button>
+              </Link>
+            )}
+          </div>
         </Modal.Body>
       </Modal>
     </div>

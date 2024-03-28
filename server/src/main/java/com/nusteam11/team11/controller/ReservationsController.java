@@ -44,6 +44,7 @@ public class ReservationsController {
         int timeSlotID = reservations.getTimeSlot().getId();
 
         if (!reservations.getReservation_date().isEmpty()
+                && !reservations.getStatus().isEmpty()
                 && spaceAmenitiesRepository.existsById(spaceID)
                 && usersRepository.existsById(userID)
                 && timeSlotsRepository.existsById(timeSlotID)) {
@@ -51,6 +52,8 @@ public class ReservationsController {
             return ResponseEntity.status(HttpStatus.CREATED).body("New reservation is added");
         } else if (reservations.getReservation_date().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reservation Date is empty.");
+        } else if (reservations.getStatus().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Status is empty.");
         } else if (!spaceAmenitiesRepository.existsById(spaceID)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Space Amenities ID does not exist.");
         } else if (!usersRepository.existsById(userID)) {

@@ -14,6 +14,7 @@ public class Reservations {
 
     private int id;
     private String reservation_date;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "space_id", referencedColumnName = "id")
@@ -68,6 +69,14 @@ public class Reservations {
 
     public void setTimeSlot(TimeSlots timeSlot) {
         this.timeSlot = timeSlot;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     

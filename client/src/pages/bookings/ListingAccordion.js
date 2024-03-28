@@ -19,7 +19,7 @@ export default function ListingAccordion(props) {
       "Nov",
       "Dec",
     ];
-    return `${parts[0]}-${monthNames[parseInt(parts[1], 10) - 1]}-${parts[2]}`;
+    return `${parts[2]}-${monthNames[parseInt(parts[1], 10) - 1]}-${parts[0]}`;
   };
 
   function handleDelete(e, listingId) {}
@@ -37,13 +37,16 @@ export default function ListingAccordion(props) {
                     <Container>
                       <Row className="align-items-center">
                         <Col className="d-none d-md-block d-lg-block d-xl-block">
-                          <div>{list.id}</div>
+                          <div>{index+1}</div>
                         </Col>
                         <Col>
                           <div>{list.space.name}</div>
                         </Col>
                         <Col>
                           <div>{formattedDate}</div>
+                        </Col>
+                        <Col>
+                          <div>{list.status}</div>
                         </Col>
                       </Row>
                     </Container>

@@ -146,6 +146,7 @@ export default function SpacesModal(props) {
         <TimeslotModal
           modalshow={TSmodalshow}
           handleClose={() => setTSmodalshow(false)}
+          spaceId={props.spaceId}
           operatingHours={props.operatingHours}
         />
       )}

@@ -74,6 +74,7 @@ function Spaces() {
                 className="d-flex justify-content-center align-items-center p-4"
               >
                 <Cardcomponent
+                  spaceId={cardsetting.id}
                   name={cardsetting.name}
                   description={cardsetting.description}
                   address={cardsetting.address}

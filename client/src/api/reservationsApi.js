@@ -15,3 +15,13 @@ export const getAllReservations = async (userID) => {
     throw error;
   }
 };
+
+export const createReservation = async (reservationData) => {
+  try {
+    const response = await api.post("/reservation/createReservation", reservationData);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to create reservation:", error);
+    throw error;
+  }
+};

@@ -130,6 +130,7 @@ export default function Cardcomponent(props) {
       <SpacesModal
         modalshow={modalshow}
         handleClose={() => setModalshow(false)}
+        spaceId={props.spaceId}
         name={props.name}
         description={props.description}
         address={props.address}
