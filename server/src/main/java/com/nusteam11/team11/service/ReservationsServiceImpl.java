@@ -22,7 +22,7 @@ public class ReservationsServiceImpl implements ReservationsService{
     }
 
     @Override
-    public List<Reservations> getAllReservations(Reservations reservations) {
-        return reservationsRepository.findAll();
+    public List<Reservations> getAllReservations(Reservations reservations, int userID) {
+        return reservationsRepository.findByUserId(userID);
     }
 }

@@ -19,11 +19,11 @@ export default function SignInForm() {
         passwordEl.current?.value
       );
 
-      if (userData.length == 0) {
+      if (userData.length === 0) {
         setError("Invalid Email/Password. Please Try Again.");
         setIsLoading(false);
       } else {
-        window.location.href = `/spaces?id=` + userData[0].id;
+        window.location.href = `/spaces?userID=` + userData[0].id;
       }
     },
     [setIsLoading, setError, emailEl, passwordEl]

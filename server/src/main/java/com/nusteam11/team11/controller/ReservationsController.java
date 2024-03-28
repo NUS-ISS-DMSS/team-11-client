@@ -1,14 +1,17 @@
 package com.nusteam11.team11.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nusteam11.team11.model.Reservations;
@@ -19,6 +22,7 @@ import com.nusteam11.team11.service.ReservationsService;
 
 @RestController
 @RequestMapping("/reservation")
+@CrossOrigin
 public class ReservationsController {
 
     @Autowired
@@ -54,12 +58,16 @@ public class ReservationsController {
         } else if (!timeSlotsRepository.existsById(timeSlotID)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Timeslot ID does not exist.");
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reservation field is empty and all ID does not exist.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Reservation field is empty and all ID does not exist.");
         }
     }
 
     @GetMapping("/getAllReservations")
-    public List<Reservations> getAllReservations(Reservations reservations){
-        return reservationsService.getAllReservations(reservations);
+    public List<Reservations> getAllReservations(Reservations reservations, @RequestParam int userID){
+        List<Reservations> filteredReservations = reservationsService.getAllReservations(reservations, userID).stream()
+            .filter(foundReservation -> foundReservation.getUser().getId() == userID)
+            .collect(Collectors.toList());
+            return filteredReservations;
     }
 }

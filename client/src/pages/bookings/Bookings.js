@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Header from "../../components/Header";
 import ListingAccordion from "./ListingAccordion";
-import { mockAccount } from "../../mocks/mockAccount";
+import { getAllReservations } from "../../api/reservationsApi";
 
 export default function Bookings() {
   const [name, setName] = useState("");
@@ -20,14 +20,17 @@ export default function Bookings() {
   }
 
   var urlParams = getUrlParams();
-  var userId = urlParams["id"] == null ? "1" : urlParams["id"];
+  var userId = urlParams["userID"];
 
-  // for mock data
-  const isUserFound = mockAccount.users.find((user) => user.id === userId);
   useEffect(() => {
-    setName(isUserFound.fullName);
-    setListingArr(isUserFound.listingsPosted);
-  }, [isUserFound]);
+    const fetchReservations = async () => {
+      const reservationsFound = await getAllReservations(userId);
+      setName(reservationsFound[0].user.full_name);
+      setListingArr(reservationsFound);
+    };
+    fetchReservations();
+  }, [userId]);
+
 
   return (
     <>
@@ -53,8 +56,8 @@ export default function Bookings() {
                 <Row className="border rounded p-2 bg-black text-white">
                   <Col>ID</Col>
                   <Col>Name of Space</Col>
-                  <Col>Created At</Col>
-                  <Col>Status</Col>
+                  <Col>Reservation Date</Col>
+                  <Col>Reservation Time Slot</Col>
                 </Row>
               </Container>
             </Container>

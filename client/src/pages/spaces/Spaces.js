@@ -9,7 +9,7 @@ function Spaces() {
   const { query, renderSearchBar } = SearchBar();
   const { filterAmenities, cardsettings } = SpacesSetting();
   const [checkboxQuery, setCheckboxQuery] = useState([]);
-
+  
   const handleChange = (value, event) => {
     if (event.target.checked) {
       setCheckboxQuery((prevValues) => [...prevValues, value]);

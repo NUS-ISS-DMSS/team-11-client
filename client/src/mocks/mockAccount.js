@@ -21,6 +21,21 @@ export const mockAccount = {
           images: "",
           createdAt: "04/08/2022",
         },
+        {
+          id: "2",
+          name: "Camaca Singapore",
+          description:
+            "Camaca specializes in sugar free and diabetic-friendly desserts ranging from gelators to cakes, chocolates and coffee.",
+          address: "9 Queenstown #01-11 Singapore 598332",
+          operatingHours_start: "10:00",
+          operatingHours_end: "10:00",
+          daysClosed: "None",
+          contactNum: "61234567",
+          station: "Queenstown",
+          keywords: ["Wifi", "Parking", "Socket"],
+          images: "",
+          createdAt: "04/08/2022",
+        },
       ],
     },
     {

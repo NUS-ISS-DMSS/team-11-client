@@ -18,7 +18,7 @@ export default function TimeslotModal(props) {
   }
 
   var urlParams = getUrlParams();
-  var userId = urlParams["id"];
+  var userId = urlParams["userID"];
 
   function convertTo24Hour(time12h) {
     const [time, modifier] = time12h.split(" ");
@@ -81,10 +81,10 @@ export default function TimeslotModal(props) {
         prevValues.filter((item) => item !== value)
       );
     }
+    console.log(checkboxQuery);
   };
 
   generateTimeSlots();
-  console.log(checkboxQuery);
 
   return (
     <div>
@@ -121,7 +121,7 @@ export default function TimeslotModal(props) {
             </Row>
             <Row>
               <div className="d-flex justify-content-center align-items-center mt-4">
-                <Link to={`/bookings`}>
+                <Link to={`/bookings?userID=` + userId}>
                   <Button variant="primary">Confirm Timeslot</Button>
                 </Link>
               </div>
