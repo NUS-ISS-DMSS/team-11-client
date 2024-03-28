@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Card, Badge, Col } from "react-bootstrap";
-import Carouselcomponent from "./Carousel";
-import SpacesModal from "../pages/spaces/SpacesModal"
+import SpacesModal from "../pages/spaces/SpacesModal";
 import {
   Clock,
   Map,
@@ -14,7 +13,6 @@ import {
 } from "react-bootstrap-icons";
 
 export default function Cardcomponent(props) {
-
   let [modalshow, setModalshow] = useState(false);
   let daysClosed = props.daysClosed.split(", ");
   let operationDays = "";
@@ -35,7 +33,11 @@ export default function Cardcomponent(props) {
     <div>
       <Card style={{ maxWidth: "20em" }}>
         <Card.Header className="p-0">
-          {/* <Carouselcomponent images={props.images} alt="slides images" /> */}
+          <img
+            className="mw-100 mh-100 rounded"
+            src={"/images/" + props.image}
+            alt="resImage"
+          />
         </Card.Header>
 
         <div onClick={() => setModalshow(true)}>
@@ -62,61 +64,61 @@ export default function Cardcomponent(props) {
 
               <div className="d-flex flex-wrap">
                 {props.amenities.map((amenity) => {
-                    if (amenity === "Wifi") {
-                      return (
-                        <div key={amenity} className="p-1">
-                          <Badge bg="success">
-                            <div>{amenity}</div>
-                            <Wifi />
-                          </Badge>
-                        </div>
-                      );
-                    } else if (amenity === "Socket") {
-                      return (
-                        <div key={amenity} className="p-1">
-                          <Badge bg="success">
-                            <div>{amenity}</div>
-                            <BatteryCharging />
-                          </Badge>
-                        </div>
-                      );
-                    } else if (amenity === "Toilet") {
-                      return (
-                        <div key={amenity} className="p-1">
-                          <Badge bg="info">
-                            <div>{amenity}</div>
-                            <Droplet />
-                          </Badge>
-                        </div>
-                      );
-                    } else if (amenity === "Parking") {
-                      return (
-                        <div key={amenity} className="p-1">
-                          <Badge bg="info">
-                            <div>{amenity}</div>
-                            <Stoplights />
-                          </Badge>
-                        </div>
-                      );
-                    } else if (amenity === "Quiet") {
-                      return (
-                        <div key={amenity} className="p-1">
-                          <Badge bg="secondary">
-                            <div>{amenity}</div>
-                            <BellSlash />
-                          </Badge>
-                        </div>
-                      );
-                    } else if (amenity === "Noisy") {
-                      return (
-                        <div key={amenity} className="p-1">
-                          <Badge bg="secondary">
-                            <div>{amenity}</div>
-                            <Speaker />
-                          </Badge>
-                        </div>
-                      );
-                    }
+                  if (amenity === "Wifi") {
+                    return (
+                      <div key={amenity} className="p-1">
+                        <Badge bg="success">
+                          <div>{amenity}</div>
+                          <Wifi />
+                        </Badge>
+                      </div>
+                    );
+                  } else if (amenity === "Socket") {
+                    return (
+                      <div key={amenity} className="p-1">
+                        <Badge bg="success">
+                          <div>{amenity}</div>
+                          <BatteryCharging />
+                        </Badge>
+                      </div>
+                    );
+                  } else if (amenity === "Toilet") {
+                    return (
+                      <div key={amenity} className="p-1">
+                        <Badge bg="info">
+                          <div>{amenity}</div>
+                          <Droplet />
+                        </Badge>
+                      </div>
+                    );
+                  } else if (amenity === "Parking") {
+                    return (
+                      <div key={amenity} className="p-1">
+                        <Badge bg="info">
+                          <div>{amenity}</div>
+                          <Stoplights />
+                        </Badge>
+                      </div>
+                    );
+                  } else if (amenity === "Quiet") {
+                    return (
+                      <div key={amenity} className="p-1">
+                        <Badge bg="secondary">
+                          <div>{amenity}</div>
+                          <BellSlash />
+                        </Badge>
+                      </div>
+                    );
+                  } else if (amenity === "Noisy") {
+                    return (
+                      <div key={amenity} className="p-1">
+                        <Badge bg="secondary">
+                          <div>{amenity}</div>
+                          <Speaker />
+                        </Badge>
+                      </div>
+                    );
+                  }
                   return console.log("Cards Error");
                 })}
               </div>
@@ -136,7 +138,7 @@ export default function Cardcomponent(props) {
         contactNum={props.contactNum}
         station={props.station}
         amenities={props.amenities}
-        // images={props.images}
+        image={props.image}
       />
     </div>
   );

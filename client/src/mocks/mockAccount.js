@@ -1,10 +1,3 @@
-import space2p1 from "../assets/spaceAssets/cafe1.jpeg";
-import space2p2 from "../assets/spaceAssets/cafe2.jpeg";
-import space2p3 from "../assets/spaceAssets/cafe3.jpeg";
-import space4p1 from "../assets/spaceAssets/p1img1.png";
-import space4p2 from "../assets/spaceAssets/p1img2.png";
-import space4p3 from "../assets/spaceAssets/p1img3.png";
-
 export const mockAccount = {
   users: [
     {
@@ -25,7 +18,7 @@ export const mockAccount = {
           contactNum: "61234567",
           station: "Queenstown",
           keywords: ["Wifi", "Parking", "Socket"],
-          images: [space4p1, space4p2, space4p3],
+          images: "",
           createdAt: "04/08/2022",
         },
       ],
@@ -48,7 +41,7 @@ export const mockAccount = {
           contactNum: "61234567",
           station: "Queenstown",
           keywords: ["Wifi", "Parking", "Socket"],
-          images: [space4p1, space4p2, space4p3],
+          images: "",
           createdAt: "04/08/2022",
         },
         {
@@ -63,7 +56,7 @@ export const mockAccount = {
           contactNum: "61233333",
           station: "Toa Payoh",
           keywords: ["Noisy", "Wifi", "Toilet"],
-          images: [space2p1, space2p2, space2p3],
+          images: "",
           createdAt: "30/10/2022",
         },
       ],

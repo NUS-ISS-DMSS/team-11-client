@@ -48,13 +48,13 @@ export default function SignUpModal(props) {
         setIsLoading(false);
       } else {
         const newUser = async () => {
-          // const newUser = await createUser(userData);
+          await createUser(userData);
           setRegister(true);
         };
         newUser();
       }
     },
-    [isUserExist, setAccountArr, setIsLoading, setError]
+    [isUserExist, setIsLoading, setError]
   );
 
   return (

@@ -25,7 +25,8 @@ public class SpacesController {
                 && !space.getDescription().isEmpty() && !space.getAddress().isEmpty()
                 && !space.getOperate_hour_st().isEmpty() && !space.getOperate_hour_et().isEmpty()
                 && !space.getDays_closed().isEmpty() && !space.getContact_num().isEmpty()
-                && !space.getStation().isEmpty()) {
+                && !space.getStation().isEmpty()
+                && !space.getImage().isEmpty()) {
             spaceService.saveSpaces(space);
             return ResponseEntity.status(HttpStatus.CREATED).body("New space is added.");
         } else if (space.getName().isEmpty()) {
@@ -45,6 +46,8 @@ public class SpacesController {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Contact Number is empty.");
         } else if (space.getStation().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Station is empty.");
+        } else if (space.getImage().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Image is empty.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("All fields are empty.");
         }

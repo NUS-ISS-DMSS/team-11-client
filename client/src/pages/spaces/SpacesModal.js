@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Container, Badge } from "react-bootstrap";
-import Carouselcomponent from "../../components/Carousel";
 import TimeslotModal from "./TimeslotModal";
 import {
   Clock,
@@ -30,8 +29,12 @@ export default function SpacesModal(props) {
           <Modal.Body>
             <Container>
               <Row>
-                <Col sm={true} className="d-flex pt-5">
-                  {/* <Carouselcomponent images={props.images} /> */}
+                <Col sm={true} className="d-flex pb-5">
+                  <img
+                    className="mw-100 mh-100 rounded"
+                    src={"/images/" + props.image}
+                    alt="modalImg"
+                  />
                 </Col>
 
                 <Col sm={true} className="d-flex pt-2">
@@ -58,7 +61,9 @@ export default function SpacesModal(props) {
                       <Col xs={1}>
                         <Telephone />
                       </Col>
-                      <Col xs={11} className="pb-4">{props.contactNum}</Col>
+                      <Col xs={11} className="pb-4">
+                        {props.contactNum}
+                      </Col>
                     </span>
                     <span className="d-flex flex-wrap pb-4">
                       {props.amenities.map((amenity) => {

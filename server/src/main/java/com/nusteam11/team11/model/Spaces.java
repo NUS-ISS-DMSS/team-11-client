@@ -18,7 +18,8 @@ public class Spaces {
     private String days_closed;
     private String contact_num;
     private String station;
-    
+    private String image;
+
     public Spaces() {
     }
 
@@ -94,5 +95,12 @@ public class Spaces {
         this.station = station;
     }
 
-    
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

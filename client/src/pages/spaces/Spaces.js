@@ -7,7 +7,7 @@ import Cardcomponent from "../../components/Cards";
 
 function Spaces() {
   const { query, renderSearchBar } = SearchBar();
-  const { filterkeywords, cardsettings } = SpacesSetting();
+  const { filterAmenities, cardsettings } = SpacesSetting();
   const [checkboxQuery, setCheckboxQuery] = useState([]);
 
   const handleChange = (value, event) => {
@@ -29,7 +29,7 @@ function Spaces() {
 
       <Container className="d-flex justify-content-center align-items-center">
         <Row>
-          {filterkeywords.map(({ label, value }) => (
+          {filterAmenities.map(({ label, value }) => (
             <Col
               key={value}
               xs={4}
@@ -88,7 +88,7 @@ function Spaces() {
                   contactNum={cardsetting.contact_num}
                   station={cardsetting.station}
                   amenities={cardsetting.amenities}
-                  // images={cardsetting.images}
+                  image={cardsetting.image}
                 />
               </div>
             ))}
