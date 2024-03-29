@@ -27,7 +27,7 @@ COPY server/ .
 RUN mvn package
 
 # Stage 3: Final image
-FROM openjdk:latest
+FROM adoptopenjdk/openjdk17:alpine
 
 # Set the working directory for the application
 WORKDIR /usr/app
