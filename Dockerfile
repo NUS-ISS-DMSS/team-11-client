@@ -5,8 +5,7 @@ WORKDIR /usr/client
 
 # Copy and install client dependencies
 COPY client/package.json client/package-lock.json ./
-RUN curl -v https://registry.npmjs.com/
-RUN npm install --no-warnings
+RUN npm install
 
 # Build client application
 COPY client/ ./
