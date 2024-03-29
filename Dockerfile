@@ -14,10 +14,6 @@ RUN npm run build
 # Set the working directory for the server
 WORKDIR /usr/server
 
-# Copy and install server dependencies
-COPY server/package.json server/package-lock.json ./
-RUN npm install
-
 # Copy server source code
 COPY server/ ./
 
@@ -25,4 +21,4 @@ COPY server/ ./
 EXPOSE 4000
 
 # Start the server
-CMD ["npm", "start"]
+CMD ["mvn", "spring-boot:run"]

@@ -7,9 +7,9 @@ import Cardcomponent from "../../components/Cards";
 
 function Spaces() {
   const { query, renderSearchBar } = SearchBar();
-  const { filterkeywords, cardsettings } = SpacesSetting();
+  const { filterAmenities, cardsettings } = SpacesSetting();
   const [checkboxQuery, setCheckboxQuery] = useState([]);
-
+  
   const handleChange = (value, event) => {
     if (event.target.checked) {
       setCheckboxQuery((prevValues) => [...prevValues, value]);
@@ -29,9 +29,9 @@ function Spaces() {
 
       <Container className="d-flex justify-content-center align-items-center">
         <Row>
-          {filterkeywords.map(({ _id, label, value }) => (
+          {filterAmenities.map(({ label, value }) => (
             <Col
-              key={_id}
+              key={value}
               xs={4}
               className="d-flex justify-content-center align-items-center p-2"
             >
@@ -58,11 +58,10 @@ function Spaces() {
               ) {
                 return false;
               }
-
               if (
                 checkboxQuery.length > 0 &&
-                !cardsetting.keywords.some((keyword) =>
-                  checkboxQuery.includes(keyword.toLowerCase())
+                !cardsetting.amenities.some((amenity) =>
+                  checkboxQuery.includes(amenity.toLowerCase())
                 )
               ) {
                 return false;
@@ -75,23 +74,22 @@ function Spaces() {
                 className="d-flex justify-content-center align-items-center p-4"
               >
                 <Cardcomponent
+                  spaceId={cardsetting.id}
                   name={cardsetting.name}
                   description={cardsetting.description}
                   address={cardsetting.address}
-                  daysClosed={cardsetting.operatingHours.daysClosed}
+                  daysClosed={cardsetting.days_closed}
                   operatingHours={
-                    cardsetting.operatingHours.start +
+                    cardsetting.operate_hour_st +
                     " AM" +
                     " - " +
-                    cardsetting.operatingHours.end +
+                    cardsetting.operate_hour_et +
                     " PM"
                   }
-                  contactNum={cardsetting.contactNum}
+                  contactNum={cardsetting.contact_num}
                   station={cardsetting.station}
-                  website={cardsetting.website}
-                  reservationUrl={cardsetting.reservationUrl}
-                  keywords={cardsetting.keywords}
-                  images={cardsetting.images}
+                  amenities={cardsetting.amenities}
+                  image={cardsetting.image}
                 />
               </div>
             ))}
