@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Container, Badge } from "react-bootstrap";
-import Carouselcomponent from "../../components/Carousel";
 import TimeslotModal from "./TimeslotModal";
 import {
   Clock,
@@ -30,8 +29,12 @@ export default function SpacesModal(props) {
           <Modal.Body>
             <Container>
               <Row>
-                <Col sm={true} className="d-flex pt-5">
-                  <Carouselcomponent images={props.images} />
+                <Col sm={true} className="d-flex pb-5">
+                  <img
+                    className="mw-100 mh-100 rounded"
+                    src={"/images/" + props.image}
+                    alt="modalImg"
+                  />
                 </Col>
 
                 <Col sm={true} className="d-flex pt-2">
@@ -58,60 +61,62 @@ export default function SpacesModal(props) {
                       <Col xs={1}>
                         <Telephone />
                       </Col>
-                      <Col xs={11}>{props.contactNum}</Col>
+                      <Col xs={11} className="pb-4">
+                        {props.contactNum}
+                      </Col>
                     </span>
                     <span className="d-flex flex-wrap pb-4">
-                      {props.keywords.map((keyword) => {
-                        if (keyword === "Wifi") {
+                      {props.amenities.map((amenity) => {
+                        if (amenity === "Wifi") {
                           return (
-                            <div key={keyword} className="p-1">
+                            <div key={amenity} className="p-1">
                               <Badge bg="success">
-                                <div>{keyword}</div>
+                                <div>{amenity}</div>
                                 <Wifi />
                               </Badge>
                             </div>
                           );
-                        } else if (keyword === "Socket") {
+                        } else if (amenity === "Socket") {
                           return (
-                            <div key={keyword} className="p-1">
+                            <div key={amenity} className="p-1">
                               <Badge bg="success">
-                                <div>{keyword}</div>
+                                <div>{amenity}</div>
                                 <BatteryCharging />
                               </Badge>
                             </div>
                           );
-                        } else if (keyword === "Toilet") {
+                        } else if (amenity === "Toilet") {
                           return (
-                            <div key={keyword} className="p-1">
+                            <div key={amenity} className="p-1">
                               <Badge bg="info">
-                                <div>{keyword}</div>
+                                <div>{amenity}</div>
                                 <Droplet />
                               </Badge>
                             </div>
                           );
-                        } else if (keyword === "Parking") {
+                        } else if (amenity === "Parking") {
                           return (
-                            <div key={keyword} className="p-1">
+                            <div key={amenity} className="p-1">
                               <Badge bg="info">
-                                <div>{keyword}</div>
+                                <div>{amenity}</div>
                                 <Stoplights />
                               </Badge>
                             </div>
                           );
-                        } else if (keyword === "Quiet") {
+                        } else if (amenity === "Quiet") {
                           return (
-                            <div key={keyword} className="p-1">
+                            <div key={amenity} className="p-1">
                               <Badge bg="secondary">
-                                <div>{keyword}</div>
+                                <div>{amenity}</div>
                                 <BellSlash />
                               </Badge>
                             </div>
                           );
-                        } else if (keyword === "Noisy") {
+                        } else if (amenity === "Noisy") {
                           return (
-                            <div key={keyword} className="p-1">
+                            <div key={amenity} className="p-1">
                               <Badge bg="secondary">
-                                <div>{keyword}</div>
+                                <div>{amenity}</div>
                                 <Speaker />
                               </Badge>
                             </div>
@@ -141,6 +146,7 @@ export default function SpacesModal(props) {
         <TimeslotModal
           modalshow={TSmodalshow}
           handleClose={() => setTSmodalshow(false)}
+          spaceId={props.spaceId}
           operatingHours={props.operatingHours}
         />
       )}
