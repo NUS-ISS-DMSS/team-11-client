@@ -9,6 +9,10 @@ export default function SignInForm() {
   const emailEl = useRef();
   const passwordEl = useRef();
 
+  const goToHomePage = (id) => {
+    window.location.href = `/spaces?userID=` + id;
+  }
+
   const handleSubmit = useCallback(
     () => async (e) => {
       e.preventDefault();
@@ -23,7 +27,8 @@ export default function SignInForm() {
         setError("Invalid Email/Password. Please Try Again.");
         setIsLoading(false);
       } else {
-        window.location.href = `/spaces?userID=` + userData[0].id;
+        goToHomePage(userData[0].id)
+        // window.location.href = `/spaces?userID=` + userData[0].id;
       }
     },
     [setIsLoading, setError, emailEl, passwordEl]
