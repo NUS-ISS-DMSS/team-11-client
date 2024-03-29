@@ -6,7 +6,7 @@ import SignUpModal from "./SignUpModal";
 import SignInForm from "./SignInForm";
 
 export default function Login() {
-  const [show, setShow] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function Login() {
       </div>
 
       {/* Sign up modal */}
-      <SignUpModal show={show} handleClose={() => setShow(false)} />
+      <SignUpModal showSignUpModal={showSignUpModal} handleClose={() => setShowSignUpModal(false)} />
     </>
   );
 }
