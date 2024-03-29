@@ -11,8 +11,14 @@ RUN npm install
 COPY client/ ./
 RUN npm run build
 
+# Set the working directory for the server
+WORKDIR /usr/server
+
+# Copy server source code
+COPY server/ ./
+
 # Expose the port for the server (change if necessary)
 EXPOSE 4000
 
 # Start the server
-CMD ["npm", "start"]
+CMD ["mvn", "spring-boot:run"]
