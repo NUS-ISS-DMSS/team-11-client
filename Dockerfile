@@ -1,12 +1,12 @@
 FROM node:latest
 
-# Set the working directory for the client
-WORKDIR /usr/client
+WORKDIR /usr/client/src/app
 
-# Copy and install client dependencies
-COPY client/package.json client/package-lock.json ./
+COPY client/package.json ./
+
 RUN npm install
 
-# Build client application
-COPY client/ ./
-RUN npm run build
+COPY client/src/ ./src/
+
+EXPOSE 4000
+CMD [ "node", "src/index.js" ]
