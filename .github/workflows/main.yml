@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
-        run: docker build -t integarationninjas/server-0.0.1 .
+        run: docker build -t integarationninjas/server/target/server-0.0.1 .
 
       - name: Publish image to docker hub
         run: docker push integarationninjas/server-0.0.1:latest
