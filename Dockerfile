@@ -1,5 +1,12 @@
-FROM eclipse-temurin:17-jdk-alpine
-WORKDIR /app
-COPY server/target/server-0.0.1.jar server-0.0.1.jar
-EXPOSE 8080
-CMD ["java", "-jar", "server-0.0.1.jar"]
+FROM node:latest
+
+WORKDIR /usr/client/src/
+
+COPY client/package.json ./
+
+RUN npm install
+
+COPY client/ ./
+
+EXPOSE 4000
+CMD [ "node", "src/index.js" ]
