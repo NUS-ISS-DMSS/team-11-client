@@ -20,7 +20,7 @@ jobs:
 
       - name: Build project
         run: |
-          cd team-11/server
+          cd server/
           mvn clean install -DskipTests
 
       - name: Log in to Docker Hub
