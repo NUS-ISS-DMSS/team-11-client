@@ -5,7 +5,7 @@ FROM node:latest
 WORKDIR /usr/client
 
 # Copy the package.json files and install dependencies
-COPY client/package.json client/package-lock.json ./
+COPY client/package.json ./
 RUN npm install
 
 # Copy the client source code
