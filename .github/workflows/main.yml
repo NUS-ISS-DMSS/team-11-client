@@ -35,9 +35,10 @@ jobs:
         with:
           images: austinliannn/nus-iss-dmss
 
-      - name: Build docker image
-        run: docker build -t integarationninjas/server-0.0.1 .
-
-      - name: Publish image to docker hub
-        run: docker push integarationninjas/server-0.0.1:latest
-
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
