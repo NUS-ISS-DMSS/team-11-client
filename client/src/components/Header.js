@@ -14,6 +14,10 @@ export default function Header() {
   const urlParams = getUrlParams();
   const userId = urlParams["userID"];
 
+  const logOut = () => {
+    window.location.href = `/`;
+  }
+
   return (
     <>
       <Stack
@@ -34,12 +38,13 @@ export default function Header() {
                 <Button size="sm">Spaces</Button>
               </Link>
             )}
-            <Link to="/" style={{ marginLeft: "4px" }}>
-              <Button variant="dark" size="sm">
-                Log out
-              </Button>
-            </Link>
-          </div>
+            <Button variant="dark" size="sm"
+            onClick={() => logOut}
+            style={{ marginLeft: "4px" }}
+            >
+              Log out
+            </Button>
+          </v>
         </Container>
       </Stack>
     </>
