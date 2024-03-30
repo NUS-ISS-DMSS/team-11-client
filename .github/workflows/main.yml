@@ -19,7 +19,9 @@ jobs:
           java-version: '17'
 
       - name: Build project
-        run: mvn clean install -DskipTests
+        run: |
+          cd team-11/server
+          mvn clean install -DskipTests
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -28,7 +30,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
-        run: docker build -t integarationninjas/server/target/server-0.0.1 .
+        run: docker build -t integarationninjas/server-0.0.1 .
 
       - name: Publish image to docker hub
         run: docker push integarationninjas/server-0.0.1:latest
