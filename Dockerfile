@@ -1,6 +1,6 @@
 FROM node:latest
 
-WORKDIR /usr/client/src/
+WORKDIR /usr/client/
 
 COPY client/package.json ./
 
