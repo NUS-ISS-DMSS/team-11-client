@@ -1,12 +1,4 @@
-FROM node:latest
-
-WORKDIR /usr/client/src/app
-
-COPY client/package.json ./
-
-RUN npm install
-
-COPY client/ ./
-
-EXPOSE 4000
-CMD [ "node", "src/index.js" ]
+FROM openjdk:17-jdk-alpine
+ARG JAR_FILE=server/target/*.jar
+COPY ./server/target/server-0.0.1.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]

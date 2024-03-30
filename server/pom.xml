@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.team11</groupId>
 	<artifactId>server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>server</name>
 	<description>team11DB</description>
 	<properties>
