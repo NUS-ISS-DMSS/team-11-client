@@ -2,14 +2,14 @@
 FROM node:latest
 
 # Set the working directory for the client
-WORKDIR /usr
+WORKDIR /usr/src/app
 
 # Copy the package.json files and install dependencies
 COPY package.json ./
 RUN npm install
 
 # Copy the client source code
-COPY / ./
+COPY . .
 
 # Expose port if needed (optional)
 EXPOSE 3000
