@@ -30,6 +30,5 @@ jobs:
           context: .
           push: true
           tags: |
-            austinliannn/nus-iss-dmss:server
-            austinliannn/nus-iss-dmss:V1.0
+            austinliannn/nus-iss-dmss:client
           labels: ${{ steps.meta.outputs.labels }}
