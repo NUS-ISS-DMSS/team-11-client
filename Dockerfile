@@ -1,12 +1,18 @@
+# Use node image as base
 FROM node:latest
 
-WORKDIR /usr/client/src/app
+# Set the working directory for the client
+WORKDIR /usr/src/app
 
-COPY client/package.json ./
-
+# Copy the package.json files and install dependencies
+COPY package.json ./
 RUN npm install
 
-COPY client/ ./
+# Copy the client source code
+COPY . .
 
-EXPOSE 4000
-CMD [ "node", "src/index.js" ]
+# Expose port if needed (optional)
+EXPOSE 3000
+
+# Define the command to start the application (adjust as needed)
+CMD ["npm", "start"]
