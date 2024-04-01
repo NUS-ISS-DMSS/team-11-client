@@ -29,9 +29,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            austinliannn/nus-iss-dmss:server
+            austinliannn/nus-iss-dmss:V1.0
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Store metadata outputs in an environment file
-        run: echo "TAGS=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
-
