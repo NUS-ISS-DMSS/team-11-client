@@ -12,7 +12,7 @@ RUN npm install
 COPY / ./
 
 # Expose port if needed (optional)
-EXPOSE 4000
+EXPOSE 3000
 
 # Define the command to start the application (adjust as needed)
 CMD ["npm", "start"]
