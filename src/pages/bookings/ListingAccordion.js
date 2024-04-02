@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Accordion, Container, Row, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
+import { deleteListing } from "../../api/reservationsApi";
 
 export default function ListingAccordion(props) {
   const formatDate = (dateString) => {
@@ -22,7 +23,16 @@ export default function ListingAccordion(props) {
     return `${parts[2]}-${monthNames[parseInt(parts[1], 10) - 1]}-${parts[0]}`;
   };
 
-  function handleDelete(e, listingId) {}
+  async function handleDelete(e, listingId) {
+    try {
+      const deleteReservation = await deleteListing(parseInt(listingId));
+      if (deleteReservation === "Reservation deleted successfully") {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Error deleting reservation:", error);
+    }
+  }
 
   return (
     <>
@@ -37,7 +47,7 @@ export default function ListingAccordion(props) {
                     <Container>
                       <Row className="align-items-center">
                         <Col className="d-none d-md-block d-lg-block d-xl-block">
-                          <div>{index+1}</div>
+                          <div>{index + 1}</div>
                         </Col>
                         <Col>
                           <div>{list.space.name}</div>
@@ -123,7 +133,7 @@ export default function ListingAccordion(props) {
                         >
                           <Button
                             variant="danger"
-                            onClick={(e) => handleDelete(e, list._id)}
+                            onClick={(e) => handleDelete(e, list.id)}
                           >
                             <Trash size={18} color="white" />
                           </Button>

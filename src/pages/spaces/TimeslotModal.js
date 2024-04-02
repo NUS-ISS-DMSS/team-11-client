@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Modal, Row, Col, Button, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createTimeSlots } from "../../api/timeSlotsApi";
 import { createReservation } from "../../api/reservationsApi";
 
 export default function TimeslotModal(props) {
-  const [checkboxQuery, setCheckboxQuery] = useState([]);
+  const navigate = useNavigate();
+  const [checkboxQuery, setCheckboxQuery] = useState();
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [toggleCfm, setToggleCfm] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
 
   const timeSlots = [];
 
@@ -74,20 +76,26 @@ export default function TimeslotModal(props) {
   };
 
   const handleProceed = async (event) => {
-    await createTimeSlots(checkboxQuery);
-    setToggleCfm(true);
+    if (checkboxQuery !== null && selectedDate !== "") {
+      await createTimeSlots(checkboxQuery);
+      setWarningMessage("");
+      setToggleCfm(true);
+    } else {
+      setWarningMessage("Please select a date and timeslot");
+    }
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (e) => {
     const timeSlotId = await createTimeSlots(checkboxQuery);
     const reservationData = {
       reservation_date: selectedDate,
       space: { id: props.spaceId },
       user: { id: parseInt(userId) },
       timeSlot: { id: timeSlotId },
-      status: "Booked"
+      status: "Booked",
     };
     await createReservation(reservationData);
+    navigate(`/bookings?userID=${userId}`);
     setToggleCfm(false);
   };
 
@@ -144,17 +152,22 @@ export default function TimeslotModal(props) {
             </Row>
           </Container>
           <div className="d-flex justify-content-center align-items-center mt-4">
+            {warningMessage && (
+              <p style={{ color: "red", fontWeight: "bold" }}>
+                {warningMessage}
+              </p>
+            )}
+          </div>
+          <div className="d-flex justify-content-center align-items-center mt-4">
             <Button variant="primary" onClick={handleProceed}>
               Proceed
             </Button>
           </div>
           <div className="d-flex justify-content-center align-items-center mt-4">
             {toggleCfm && (
-              <Link to={`/bookings?userID=` + userId}>
-                <Button variant="primary" onClick={handleSubmit}>
-                  Confirm Booking
-                </Button>
-              </Link>
+              <Button variant="primary" onClick={handleSubmit}>
+                Confirm Booking
+              </Button>
             )}
           </div>
         </Modal.Body>

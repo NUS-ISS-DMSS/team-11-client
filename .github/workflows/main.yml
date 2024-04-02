@@ -2,7 +2,7 @@ name: Publish Docker image
 
 on:
   push:
-    branches: ['austin']
+    branches: ['master']
 
 jobs:
   build:
