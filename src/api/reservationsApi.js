@@ -1,10 +1,4 @@
-import axios from "axios";
-
-const API_BASE_URL = "http://localhost:8080";
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-});
+import api from "./settingApi";
 
 export const getAllReservations = async (userID) => {
   try {
@@ -22,6 +16,20 @@ export const createReservation = async (reservationData) => {
     return response.data;
   } catch (error) {
     console.error("Failed to create reservation:", error);
+    throw error;
+  }
+};
+
+export const deleteListing = async (listingId) => {
+  try {
+    const response = await api.post("/reservation/deleteListing", listingId, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to delete reservation:", error);
     throw error;
   }
 };
