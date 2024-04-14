@@ -1,10 +1,6 @@
 # Use node image as base
 FROM node:latest
 
-# Stage 1: Syntax and linting checks
-FROM hadolint/hadolint:latest as hadolint
-COPY Dockerfile /Dockerfile
-RUN hadolint Dockerfile
 
 # Set the working directory for the client
 WORKDIR /usr/src/app

@@ -33,15 +33,15 @@ jobs:
             austinliannn/nus-iss-dmss:client
           labels: ${{ steps.meta.outputs.labels }}
 
-  # deploy:
-  #   needs: build
-  #   runs-on: [ aws-ec2 ]
-  #   steps:
-  #     - name: Pull Image from docker hub
-  #       run: docker pull austinliannn/nus-iss-dmss:client
+  deploy:
+    needs: build
+    runs-on: [ aws-ec2 ]
+    steps:
+      - name: Pull Image from docker hub
+        run: docker pull austinliannn/nus-iss-dmss:client
 
-  #     - name: Delete old container
-  #       run: docker rm -f client-container
+      - name: Delete old container
+        run: docker rm -f client-container
 
-  #     - name: Run docker container
-  #       run: docker run -d -p 3000:3000 --name client-container austinliannn/nus-iss-dmss:client
+      - name: Run docker container
+        run: docker run -d -p 3000:3000 --name client-container austinliannn/nus-iss-dmss:client
