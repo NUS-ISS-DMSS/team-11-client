@@ -3,6 +3,7 @@ import { Modal, Row, Col, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { createTimeSlots } from "../../api/timeSlotsApi";
 import { createReservation } from "../../api/reservationsApi";
+import ReservationDataBuilder from "./ReservationBuilder";
 
 export default function TimeslotModal(props) {
   const navigate = useNavigate();
@@ -86,14 +87,18 @@ export default function TimeslotModal(props) {
   };
 
   const handleSubmit = async (e) => {
+    if (!checkboxQuery || !selectedDate) return;
+
     const timeSlotId = await createTimeSlots(checkboxQuery);
-    const reservationData = {
-      reservation_date: selectedDate,
-      space: { id: props.spaceId },
-      user: { id: parseInt(userId) },
-      timeSlot: { id: timeSlotId },
-      status: "Booked",
-    };
+
+    const reservationData = new ReservationDataBuilder()
+      .setReservationDate(selectedDate)
+      .setSpaceId(props.spaceId)
+      .setUserId(parseInt(userId))
+      .setTimeSlotId(timeSlotId)
+      .setStatus("Booked")
+      .build();
+    
     await createReservation(reservationData);
     navigate(`/bookings?userID=${userId}`);
     setToggleCfm(false);
