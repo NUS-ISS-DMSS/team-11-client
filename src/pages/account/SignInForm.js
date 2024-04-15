@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { getUser } from "../../api/userApi";
+import auth from "./Auth";
 
 export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,16 +15,16 @@ export default function SignInForm() {
       e.preventDefault();
       setIsLoading(true);
 
-      const userData = await getUser(
-        emailEl.current?.value,
-        passwordEl.current?.value
-      );
-
-      if (userData.length === 0) {
+      const isLoggedIn = await auth.login(emailEl.current?.value, passwordEl.current?.value);
+      if (isLoggedIn === true) {
+        const userData = await getUser(
+          emailEl.current?.value,
+          passwordEl.current?.value
+        );
+        window.location.href = `/spaces?userID=` + userData[0].id;
+      } else {
         setError("Invalid Email/Password. Please Try Again.");
         setIsLoading(false);
-      } else {
-        window.location.href = `/spaces?userID=` + userData[0].id;
       }
     },
     [setIsLoading, setError, emailEl, passwordEl]
