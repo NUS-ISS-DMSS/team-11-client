@@ -32,10 +32,6 @@ class Auth {
       this.isAuthenticated = false;
       localStorage.removeItem('isAuthenticated');
     }
-  
-    checkAuthentication() {
-      return this.isAuthenticated || localStorage.getItem('isAuthenticated') === 'true';
-    }
   }
   
   const auth = new Auth();
