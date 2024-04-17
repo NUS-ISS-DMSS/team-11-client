@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Button, Stack } from "react-bootstrap";
 import Logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
+import auth from "../pages/account/Auth";
 
 export default function Header() {
   
@@ -13,6 +14,11 @@ export default function Header() {
   
   const urlParams = getUrlParams();
   const userId = urlParams["userID"];
+
+  const handleLogout = () => {
+    console.log("Logged out");
+    auth.logout();
+  }
 
   return (
     <>
@@ -34,7 +40,7 @@ export default function Header() {
                 <Button size="sm">Spaces</Button>
               </Link>
             )}
-            <Link to="/" style={{ marginLeft: "4px" }}>
+            <Link to="/" style={{ marginLeft: "4px" }} onClick={handleLogout}>
               <Button variant="dark" size="sm">
                 Log out
               </Button>
